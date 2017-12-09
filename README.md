@@ -1,2 +1,2 @@
 # blockchain
-Data Science Master
+Pet Project @ DSM
