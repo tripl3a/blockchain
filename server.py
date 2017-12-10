@@ -1,10 +1,14 @@
 from uuid import uuid4
 from flask import Flask
+from flask import request
+import json
 
 from blockchain import Blockchain
 
 # Instantiate our node
 app = Flask(__name__)
+# In debug mode the server doesn't need a restart to reflect code changes
+app.debug = True
 
 # Generate a globally unique address for this node
 node_identifier = str(uuid4()).replace("-", "")
@@ -13,31 +17,18 @@ node_identifier = str(uuid4()).replace("-", "")
 blockchain = Blockchain()
 
 
-@app.route("/mine", methods=["GET"])
-def blockchain_mine():
-    return "We'll mine a new block"
-
-
-@app.route("/transactions/new", methods=["POST"])
-def new_blockchain_transaction():
-    return "We'll add a new transaction"
-
-
 @app.route("/chain", methods=["GET"])
 def full_chain():
     response = {
         "chain": blockchain.chain,
         "length": len(blockchain.chain)
     }
-    return Flask.jsonify(response), 200
-
-
-if __name__ == "__main__":
-    app.run(host="127.0.0.1", port=5000)
+    return json.dumps(response), 200
 
 
 @app.route("/transactions/new", methods=["POST"])
 def new_blockchain_transaction():
+    print("new transaction started...")
     values = request.get_json()
 
     # Check that the required fields are in the POST'ed data
@@ -49,7 +40,8 @@ def new_blockchain_transaction():
     index = blockchain.new_transaction(values["sender"], values["recipient"], values["amount"])
 
     response = {"message": f"Transaction will be added to Block {index}"}
-    return Flask.jsonify(response), 201
+    print("...new transaction finished")
+    return json.dumps(response), 201
 
 
 @app.route("/mine", methods=["GET"])
@@ -68,11 +60,15 @@ def blockchain_mine():
     block = blockchain.new_block(proof, previous_hash)
 
     response = {
-        "message": "New block forged",
-        "index": block["index"],
-        "transactions": block["transactions"],
-        "proof": block["proof"],
-        "previous_hash": block["previous_hash"]
+        'message': "New Block Forged",
+        'index': block['index'],
+        'transactions': block['transactions'],
+        'proof': block['proof'],
+        'previous_hash': block['previous_hash'],
     }
-    return Flask.jsonify(response), 200
+    return json.dumps(response), 200
+    return "foo bar"
 
+
+if __name__ == "__main__":
+    app.run(host="127.0.0.1", port=5000)

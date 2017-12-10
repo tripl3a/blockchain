@@ -13,7 +13,7 @@ class Blockchain(object):
         # Create the genesis block
         self.new_block(previous_hash=1, proof=100)
 
-    # TODO: isn't it security issues to let previous_hash be optional?!
+    # TODO: isn't it a security issue to let previous_hash be optional?!
     def new_block(self, proof, previous_hash=None):
         """
         Creates a new block in the blockchain
@@ -35,6 +35,7 @@ class Blockchain(object):
         self.current_transactions = []
 
         self.chain.append(block)
+        return block
 
     def new_transaction(self, sender, recipient, amount):
         """
@@ -97,5 +98,5 @@ class Blockchain(object):
         """
 
         guess = f'{last_proof}{proof}'.encode()
-        guess_hash = hashlib.sha256(guess).hexdigist()
+        guess_hash = hashlib.sha256(guess).hexdigest()
         return guess_hash[:4] == "0000"
