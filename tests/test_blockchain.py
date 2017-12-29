@@ -1,4 +1,4 @@
-from blockchain import Blockchain
+from blockchain.blockchain import Blockchain
 
 
 def test_new_block_invalid_proof():
