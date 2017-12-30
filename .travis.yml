@@ -4,13 +4,6 @@ python:
   - nightly
 install:
     - pip install Flask==0.12.2 requests==2.18.4
-addons:
-  sonarcloud:
-    organization: "tripl3a-github"
-    token:
-      secure: "tripl3a-github-token"
-    branches:
-      - working-copy
 script:
   - pytest
   - sonar-scanner
