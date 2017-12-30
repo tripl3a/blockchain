@@ -23,6 +23,10 @@ class Blockchain(object):
         :return: <dict> New block
         """
 
+        # TODO: implement proof check, something like this:
+        #if self.valid_proof(self.last_block["proof"], proof) is False:
+        #    raise Exception("Block rejected due to incorrect proof!")
+
         block = {
             "index": len(self.chain) + 1,
             "timestamp": time(),

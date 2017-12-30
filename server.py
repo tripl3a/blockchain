@@ -1,3 +1,5 @@
+# to start Flask server simply call "python server.py"
+
 from uuid import uuid4
 from flask import Flask
 from flask import request
@@ -67,7 +69,6 @@ def blockchain_mine():
         'previous_hash': block['previous_hash'],
     }
     return json.dumps(response), 200
-    return "foo bar"
 
 
 if __name__ == "__main__":
