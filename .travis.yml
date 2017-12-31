@@ -4,6 +4,11 @@ python:
   - nightly
 install:
     - pip install Flask==0.12.2 requests==2.18.4
+addons:
+  sonarcloud:
+    organization: "tripl3a-github"
+    token:
+      secure: "N0bZGKa/gSdetvkhVpeDbV0Vzu9plRHdg+x47J6knVUWOjriA7NTJt2bys85MqOnbL2DPgp304iBmHgUdJOaI5HTYDTaGx29NbotstQfaeADODRq2CpIFfPYqS0TPivEhw3k+3nQSHtOeya3iT+ANQGlYNnPSGtM6QvfHFC9biCUoZ/TPV+D40dzjjn5jI/8jmj642dQSypoI+UwTvJwYCv93jUQV94nnpRE4MX465Uyz9IyAXTSfBQXt8JXBB3i/W63SIdIpK24JATvKpyZsKNbcusORr1QP2a02IpS7EQSNA5Y4MV6aA7o9OJViPjCV0I0SfuLQe+EA0xYY4iictMDs9o1mFgJRi4RrUch/IQeb0MyTNHwXNvg0k9lzOvqfE/bn5EeMahkt+wVZXWUnk/iBpE1w+Z3cX2Cg8Nqb+o+wha00EVmpapdum29vd9N0uXttVwuFOcABUuBcDuEuf6a8SbE0t/XNwDTMKg3QeK0EAqeQUPa8Go+3MdnwJRen9PYZ/DOyKNor7m+f0HyVIP7cIqQAUyV0yYBu/5sJpsTYvOQrjQUc6FI1Bsw0KkQaHNkaZSsGxNmbdSQn9X4TyfglS2H5h8BYnDV4dWivGLlUZoRkL/XkiQYqImMVOyl3U85qLJEkMhsRxXdrFrB7EreNxMTB1jQqsxy//idCHw="
 script:
   - pytest
   - sonar-scanner
