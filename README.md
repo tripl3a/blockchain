@@ -1,66 +1,50 @@
-# A simple Blockchain Implementation in Python 
+# A basic Blockchain Implementation in Python 
 
 Advanced Software Engineering Pet Project
-for the Data Sciences Master's Program at Beuth University of Applied Sciences, Berlin
+for the Data Sciences Master's Program at Beuth University of Applied Sciences, Berlin.
 
-## Exercise
-
-A) Write a small pet project to get into coding again. 
-You might want to use a language as Python which is also good for this Master! 
-The Code can be relatively simple (as a simple game with console output).
-
-B) Make sure each Person has applied the following topics on the code which have been taught in the lecture:
-
-* UML (at least 5 diagrams)
-* Metrics (at least two. Sonarcube would be great)
-* Clean Code Development (at least 5 points you can show me)
-* Continous Delivery (show me your pipeline in e.g. Jenkins and Travis-CI)
-* AOP (show me where you could have integrated AOP stuff => the jointpoints)
-* DSL (Create a small DSL Demo example snippet in your code even if it does not contribute to your project)
-* Functional Programming (prove that you have covered all functional definitions in your code as
-    * only final data structures
-    * (mostly) side effect free functions
-    * the use of higher order functions
-    * functions as parameters and return values
-    * use clojures / anonymous functions
-* Show me an idea where to use a logical solver in your code and how you would do it!
-* Write a little code fragment (like data preparation etc.) in Scala or Clojure!
-
-The complete project must be sent to the lecturer in the last weeks before the semester ends = 8th February 2018! 
-The contribution must include the link to GitHub and 3 pages explaining B (or links to B) as a MarkupPage in GitHub!
-
-Zuletzt geändert: Freitag, 12. Januar 2018, 19:35
-
+requirements: see requirements.txt
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
+I worked with Python 3 and installed the following additional packages via anaconda.
 
 ```
-Give examples
+conda install flask
+conda install django
 ```
+
+Furthermore I used Postman as HTTP client to interact with the Flask WebApp.
 
 ### Installing
 
-A step by step series of examples that tell you have to get a development env running
+Just clone / download this repository.
 
-Say what the step will be
+## Clean Code Development
 
-```
-Give the example
-```
+Principles were applied according to: [http://clean-code-developer.de/die-grade/roter-grad/]()
 
-And repeat
+### Using a version control system 
 
-```
-until finished
-```
+Well, as you can see we're on GitHub here... :white_check_mark: ![alt text](https://www.iconsdb.com/icons/download/green/check-mark-2-64.png)
 
-End with an example of getting some data out of the system or using it for a little demo
+### Apply simple refactoring patterns
+
+#### Extract methods (DRY principle)
+
+e.g. the hash() method: first it was in the Blockchain class. 
+But then I created the class Block where I also wanted a hash() method.
+First I copy & pasted the code. Eventually I was able to delete the method in Blockchain.
+(see commit f94974e7170cbe10a7e9154a991ae62101df2795)
+
+### Rename cryptic names (scout rule)
+
+for example in commit 7fcebf465a8359312bd1650f62e2c18e257c0519 of test_blockchain.py :white_check_mark:
+
 
 ## Interacting with the Blockchain
 
@@ -73,7 +57,7 @@ $ python server.py
 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
 ```
 
-View the full chain by requesting [http://localhost:5000/chain]()
+View the full chain by GET requesting [http://localhost:5000/chain]()
 
 Create a new transaction by making a POST request to
 [http://localhost:5000/transactions/new]()
@@ -88,14 +72,3 @@ with a body containing our transaction structure:
 
 
 Mine a block by making a GET request to [http://localhost:5000/mine]()
-
-
-
-
-
-
-
-
-
-
-
