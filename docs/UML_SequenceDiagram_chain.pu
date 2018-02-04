@@ -1,0 +1,7 @@
+@startuml
+HTTPClient -> FlaskWebApp: GET /chain
+FlaskWebApp -> Blockchain: (get attribute) chain
+Blockchain -> FlaskWebApp: chain
+FlaskWebApp -> JSON: dumps(response) 
+JSON -> HTTPClient: serialized response
+@enduml

@@ -1,0 +1,9 @@
+@startuml
+HTTPClient -> FlaskWebApp: POST /transactions/new
+FlaskWebApp -> Request: get_json()
+Request -> FlaskWebApp: json
+FlaskWebApp -> Blockchain: new_transaction()
+Blockchain -> FlaskWebApp: next_block_index
+FlaskWebApp -> JSON: dumps(response)
+JSON -> HTTPClient: serialized response
+@enduml

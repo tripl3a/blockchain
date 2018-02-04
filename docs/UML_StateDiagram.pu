@@ -1,0 +1,8 @@
+@startuml
+scale 1000 width
+[*] --> NoCurrentTransactions : initialize
+NoCurrentTransactions --> [*] : shutdown
+NoCurrentTransactions -> UnminedTransactions : New Transaction
+UnminedTransactions -> NoCurrentTransactions : Mine new Block
+UnminedTransactions --> [*] : shutdown
+@enduml
