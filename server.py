@@ -4,8 +4,7 @@ from uuid import uuid4
 from flask import Flask
 from flask import request
 import json
-
-from blockchain import Blockchain
+import blockchain as bc
 
 # Instantiate our node
 app = Flask(__name__)
@@ -16,7 +15,7 @@ app.debug = True
 node_identifier = str(uuid4()).replace("-", "")
 
 # Instantiate the blockchain
-blockchain = Blockchain()
+blockchain = bc.Blockchain()
 
 
 @app.route("/chain", methods=["GET"])
@@ -25,7 +24,7 @@ def full_chain():
         "chain": blockchain.chain,
         "length": len(blockchain.chain)
     }
-    return json.dumps(response), 200
+    return json.dumps(response, cls=bc.LazyEncoder, indent=4), 200
 
 
 @app.route("/transactions/new", methods=["POST"])
@@ -43,7 +42,7 @@ def new_blockchain_transaction():
 
     response = {"message": f"Transaction will be added to Block {index}"}
     print("...new transaction finished")
-    return json.dumps(response), 201
+    return json.dumps(response, cls=bc.LazyEncoder, indent=4), 201
 
 
 @app.route("/mine", methods=["GET"])
@@ -58,7 +57,7 @@ def blockchain_mine():
         amount=1
     )
 
-    previous_hash = blockchain.hash(last_block)
+    previous_hash = last_block.__hash__()
     block = blockchain.new_block(proof, previous_hash)
 
     response = {
@@ -68,7 +67,7 @@ def blockchain_mine():
         'proof': block['proof'],
         'previous_hash': block['previous_hash'],
     }
-    return json.dumps(response), 200
+    return json.dumps(response, cls=bc.LazyEncoder, indent=4), 200
 
 
 if __name__ == "__main__":
