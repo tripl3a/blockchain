@@ -2,8 +2,11 @@ language: python
 python:
   - 3.6
   - nightly
+env:
+  - DJANGO_VERSION=1.11.8
 install:
-    - pip install Flask==0.12.2 requests==2.18.4
+  - pip install Flask==0.12.2 requests==2.18.4
+  - pip install -q Django==$DJANGO_VERSION
 addons:
   sonarcloud:
     organization: "tripl3a-github"
