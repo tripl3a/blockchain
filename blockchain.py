@@ -1,8 +1,6 @@
 import hashlib
 import json
 from time import time
-from uuid import uuid4
-from flask import Flask
 from django.core.serializers.json import DjangoJSONEncoder
 
 
@@ -61,9 +59,23 @@ class Blockchain(object):
         self.current_transactions = []
 
         # Create the genesis block
-        self.new_block(previous_hash=1, proof=100)
+        self.new_block(proof=100, previous_hash=1)
+
+    def logger(func):
+        """
+        console logging function to be used as decorator, thus returning a nested wrapper function
+        """
+        def log_func(*args, **kwargs):
+            print('Blockchain running "{}" with arguments {}, {}'.format(func.__name__, args, kwargs))
+            result = func(*args, **kwargs)
+            print('Blockchain finished "{}"'.format(func.__name__))
+            return result
+
+        # Necessary for closure to work (returning without parenthesis)
+        return log_func
 
     # TODO: isn't it a security issue to let previous_hash be optional?!
+    @logger
     def new_block(self, proof, previous_hash=None):
         """
         Creates a new block in the blockchain
@@ -87,7 +99,6 @@ class Blockchain(object):
                       timestamp=time(),
                       transactions=self.current_transactions,
                       proof=proof,
-                      # previous_hash=previous_hash or self.hash(self.chain[-1]
                       previous_hash=previous_hash or self.chain[-1].__hash__())
 
         # Reset the current list of transactions
@@ -96,6 +107,7 @@ class Blockchain(object):
         self.chain.append(block)
         return block
 
+    @logger
     def new_transaction(self, sender, recipient, amount):
         """
         Creates a new transaction to go into the next mined block
@@ -115,9 +127,11 @@ class Blockchain(object):
         return self.last_block["index"] + 1
 
     @property
+    @logger
     def last_block(self):
         return self.chain[-1]
 
+    @logger
     def proof_of_work(self, last_proof):
         """
         Simple proof of work algorithm:
@@ -134,6 +148,7 @@ class Blockchain(object):
         return proof
 
     @staticmethod
+    @logger
     def valid_proof(last_proof, proof):
         """
         Validates the proof: Does hash(last_proof, proof) contain 4 leading zeros?
