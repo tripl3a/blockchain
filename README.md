@@ -30,7 +30,7 @@ Principles were applied according to: [http://clean-code-developer.de/die-grade/
 
 ### Using a version control system 
 
-Well, as you can see we're on GitHub here... :white_check_mark: ![alt text](https://www.iconsdb.com/icons/download/green/check-mark-2-64.png)
+Well, as you can see we're on GitHub here... :white_check_mark:
 
 ### Apply simple refactoring patterns
 
@@ -45,6 +45,28 @@ First I copy & pasted the code. Eventually I was able to delete the method in Bl
 
 for example in commit 7fcebf465a8359312bd1650f62e2c18e257c0519 of test_blockchain.py :white_check_mark:
 
+## Continuous Delivery
+
+[Travis-CI](https://travis-ci.org/tripl3a/blockchain) has been used as the tool for Continuous Integration.
+
+## Metrics
+
+For metrics I used [Sonarcloud](https://sonarcloud.io/dashboard?id=tripl3a-github-token%3Aworking-copy)
+
+## AOP + Functional Programming
+
+The following requirements where solved by writing a Decorator:
+* the use of higher order functions :white_check_mark:
+* functions as parameters and return values :white_check_mark:
+* use closures :white_check_mark:
+* AOP :white_check_mark:
+The decorator @logger is used in the class Blockchain to print console outputs 
+before entering and after executing a (decorated) method. 
+Using Decorators is also a way to add aspects to Python methods. (=> AOP)
+
+## DSL
+
+Can be found in a [separate git repository](https://github.com/tripl3a/dsl)
 
 ## Interacting with the Blockchain
 
