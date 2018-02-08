@@ -39,7 +39,7 @@ def new_blockchain_transaction():
     # Create a new transaction
     index = blockchain.new_transaction(values["sender"], values["recipient"], values["amount"])
 
-    response = {"message": f"Transaction will be added to Block {index}"}
+    response = {"message": f"Transaction will be added to Block %s" % index}
     return json.dumps(response, cls=bc.LazyEncoder, indent=4), 201
 
 
@@ -68,6 +68,8 @@ def blockchain_mine():
     return json.dumps(response, cls=bc.LazyEncoder, indent=4), 200
 
 
+host_ip = "127.0.0.1"
+
 if __name__ == "__main__":
-    app.run(host="127.0.0.1", port=5000)
+    app.run(host=host_ip, port=5000)
 
