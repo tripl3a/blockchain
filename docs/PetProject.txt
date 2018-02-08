@@ -1,6 +1,13 @@
 https://travis-ci.org/tripl3a/blockchain
 https://sonarcloud.io/projects
 
+##### GIT #####
+
+# Merge development branch with master
+git fetch origin master
+git merge master
+git push origin working-copy:master
+
 ##### TEST #####
 
 https://docs.pytest.org/en/latest/goodpractices.html
