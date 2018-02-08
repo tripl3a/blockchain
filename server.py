@@ -5,6 +5,7 @@ from flask import Flask
 from flask import request
 import json
 import blockchain as bc
+import json
 
 # Instantiate our node
 app = Flask(__name__)
@@ -68,8 +69,12 @@ def blockchain_mine():
     return json.dumps(response, cls=bc.LazyEncoder, indent=4), 200
 
 
-host_ip = "127.0.0.1"
+with open('config.json', 'r') as f:
+    config = json.load(f)
+
+ip_address = config['HOST_IP']['IP_ADDRESS']
+port_number = config['HOST_IP']['PORT_NUMBER']
 
 if __name__ == "__main__":
-    app.run(host=host_ip, port=5000)
+    app.run(host=ip_address, port=port_number)
 
