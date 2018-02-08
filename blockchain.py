@@ -54,9 +54,11 @@ class Block:
 
 
 class Blockchain(object):
+
     def __init__(self):
         self.chain = []
         self.current_transactions = []
+        self.do_log = False
 
         # Create the genesis block
         self.new_block(proof=100, previous_hash=1)
@@ -68,7 +70,7 @@ class Blockchain(object):
         def log_func(*args, **kwargs):
             print('Blockchain running "{}" with arguments {}, {}'.format(func.__name__, args, kwargs))
             result = func(*args, **kwargs)
-            print('Blockchain finished "{}"'.format(func.__name__))
+            print('Blockchain finished "{}" with result {}'.format(func.__name__, result))
             return result
 
         # Necessary for closure to work (returning without parenthesis)
