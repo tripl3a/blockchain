@@ -29,11 +29,10 @@ def full_chain():
 
 @app.route("/transactions/new", methods=["POST"])
 def new_blockchain_transaction():
-    print("new transaction started...")
     values = request.get_json()
 
     # Check that the required fields are in the POST'ed data
-    required = ["sender", "recipient", "amount"]
+    required = ("sender", "recipient", "amount")
     if not all(k in values for k in required):
         return "Missing values", 400
 
@@ -41,7 +40,6 @@ def new_blockchain_transaction():
     index = blockchain.new_transaction(values["sender"], values["recipient"], values["amount"])
 
     response = {"message": f"Transaction will be added to Block {index}"}
-    print("...new transaction finished")
     return json.dumps(response, cls=bc.LazyEncoder, indent=4), 201
 
 
@@ -72,3 +70,4 @@ def blockchain_mine():
 
 if __name__ == "__main__":
     app.run(host="127.0.0.1", port=5000)
+
