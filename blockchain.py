@@ -12,10 +12,6 @@ class LazyEncoder(DjangoJSONEncoder):
         if isinstance(obj, Block):
             return str(obj)
         return super().default(obj)
-    """
-    def default(self, obj):
-        return json.dumps(obj, default=lambda o: o.__dict__, sort_keys=True, indent=4)
-    """
 
 
 class Block:
