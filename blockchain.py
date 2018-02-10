@@ -180,3 +180,9 @@ class Blockchain(object):
             result += reduce(lambda x, y: x + y["amount"], block.transactions, 0)
         result += reduce(lambda x, y: x + y["amount"], self.current_transactions, 0)
         return result
+
+    def __setattr__(self, attr, value):
+        if attr == "chain" and hasattr(self, "chain") and len(self.chain) > 0:
+            raise AttributeError("Attempting to overwrite the blockchain")
+
+        self.__dict__[attr] = value

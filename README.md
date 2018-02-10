@@ -149,6 +149,22 @@ Anonymous functions:
 
 * In [Blockchain.total_transactions_amount()](https://github.com/tripl3a/blockchain/blob/b99daef56060f260d8c748d98a81a427dcb15620/blockchain.py#L172) a lambda function is used.
 
+Only final data structures:
+
+In Python there is no `final` keyword like in Java, which one can use to define constants.
+You can achieve some similar semantic in by overwriting the attribute setter in the following way:
+```
+class WriteOnceReadWhenever:
+    def __setattr__(self, attr, value):
+        if hasattr(self, attr):
+            raise Exception("Attempting to alter read-only value")
+
+        self.__dict__[attr] = value
+```
+I implemented such a method in the Blockchain class to ensure that the `chain` attribute can't be overwritten. 
+
+Anyway I didn't write any code that reuses/overwrites variables.
+
 ## Domain Specific Language
 
 A small example for a DSL in Python can be found in a [separate git repository](https://github.com/tripl3a/dsl).
