@@ -3,7 +3,6 @@
 from uuid import uuid4
 from flask import Flask
 from flask import request
-import json
 import blockchain as bc
 import json
 
