@@ -1,6 +1,8 @@
 @startuml
 HTTPClient -> FlaskWebApp: GET /mine
 FlaskWebApp -> Blockchain: (get) last_proof
+Blockchain -> Block: (get) last_block.proof
+Block -> Blockchain: proof
 Blockchain -> FlaskWebApp: last_proof
 FlaskWebApp -> Blockchain: proof_of_work(last_proof)
 Blockchain -> FlaskWebApp: new_proof
