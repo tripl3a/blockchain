@@ -2,6 +2,7 @@ import hashlib
 import json
 from time import time
 from django.core.serializers.json import DjangoJSONEncoder
+from functools import reduce
 
 
 class LazyEncoder(DjangoJSONEncoder):
@@ -166,3 +167,16 @@ class Blockchain(object):
         guess = f'{last_proof}{proof}'.encode()
         guess_hash = hashlib.sha256(guess).hexdigest()
         return guess_hash[:4] == "0000"
+
+    @logger
+    def total_transactions_amount(self):
+        """
+        Computes the total amount of all transactions.
+
+        :return: <int> The total amount of all transactions
+        """
+        result = 0
+        for block in self.chain:
+            result += reduce(lambda x, y: x + y["amount"], block.transactions, 0)
+        result += reduce(lambda x, y: x + y["amount"], self.current_transactions, 0)
+        return result
