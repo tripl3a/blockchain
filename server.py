@@ -46,25 +46,22 @@ def new_blockchain_transaction():
 
 @app.route("/mine", methods=["GET"])
 def blockchain_mine():
-    last_block = blockchain.last_block
-    last_proof = last_block["proof"]
-    proof = blockchain.proof_of_work(last_proof)
+    new_proof = blockchain.proof_of_work(blockchain.last_proof)
 
     blockchain.new_transaction(
-        sender="0",
+        sender=blockchain.mining_sender_address,
         recipient=node_identifier,
-        amount=1
+        amount=blockchain.mining_reward
     )
 
-    previous_hash = last_block.__hash__()
-    block = blockchain.new_block(proof, previous_hash)
+    block = blockchain.new_block(new_proof)
 
     response = {
         'message': "New Block Forged",
-        'index': block['index'],
-        'transactions': block['transactions'],
-        'proof': block['proof'],
-        'previous_hash': block['previous_hash'],
+        'index': block.index,
+        'transactions': block.transactions,
+        'proof': block.proof,
+        'previous_hash': block.previous_hash,
     }
     return json.dumps(response, cls=bc.LazyEncoder, indent=4), 200
 
@@ -73,7 +70,7 @@ with open('config.json', 'r') as f:
     config = json.load(f)
 
 ip_address = config['HOST_IP']['IP_ADDRESS']
-port_number = config['HOST_IP']['PORT_NUMBER']
+port_number = int(config['HOST_IP']['PORT_NUMBER'])
 
 if __name__ == "__main__":
     app.run(host=ip_address, port=port_number)

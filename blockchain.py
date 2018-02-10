@@ -49,15 +49,21 @@ class Block:
             return self.__dict__
 
 
+class InvalidProofError(ValueError):
+    """raise this when an invalid proof was provided by a miner"""
+
+
 class Blockchain(object):
 
     def __init__(self):
         self.chain = []
         self.current_transactions = []
         self.do_log = False
+        self.mining_reward_amount = 1
+        self.mining_sender_address = "the_mine"
 
         # Create the genesis block
-        self.new_block(proof=100, previous_hash=1)
+        self.new_block(proof=100)
 
     def logger(func):
         """
@@ -72,32 +78,28 @@ class Blockchain(object):
         # Necessary for closure to work (returning without parenthesis)
         return log_func
 
-    # TODO: isn't it a security issue to let previous_hash be optional?!
     @logger
-    def new_block(self, proof, previous_hash=None):
+    def new_block(self, proof):
         """
         Creates a new block in the blockchain
 
         :param proof: <int> The proof given by the proof of work algorithm
-        :param previous_hash: (Optional) <str> hash of previous block
         :return: <dict> New block
         """
 
-        # TODO: check if there are current transactions:
-        # TODO: implement as a function (-> functional programming)
-        #if len(self.current_transactions) == 0:
-        #    raise Exception("No current transactions!")
+        if len(self.chain) == 0:
+            previous_hash = 1  # initial hash for genesis block
+        else:
+            previous_hash = self.chain[-1].__hash__()
 
-        # TODO: implement proof check, something like this:
-        # TODO: implement as a function (-> functional programming)
-        #if self.valid_proof(self.last_block["proof"], proof) is False:
-        #    raise Exception("Block rejected due to incorrect proof!")
+            if self.valid_proof(self.last_block["proof"], proof) is False:
+                raise InvalidProofError("Block rejected due to incorrect proof!")
 
         block = Block(index=len(self.chain) + 1,
                       timestamp=time(),
                       transactions=self.current_transactions,
                       proof=proof,
-                      previous_hash=previous_hash or self.chain[-1].__hash__())
+                      previous_hash=previous_hash)
 
         # Reset the current list of transactions
         self.current_transactions = []
@@ -128,6 +130,11 @@ class Blockchain(object):
     @logger
     def last_block(self):
         return self.chain[-1]
+
+    @property
+    @logger
+    def last_proof(self):
+        return self.last_block.proof
 
     @logger
     def proof_of_work(self, last_proof):
