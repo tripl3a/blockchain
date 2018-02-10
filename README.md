@@ -161,7 +161,7 @@ class WriteOnceReadWhenever:
 
         self.__dict__[attr] = value
 ```
-I implemented such a method in the Blockchain class to ensure that the `chain` attribute can't be overwritten. 
+I implemented [such a method](https://github.com/tripl3a/blockchain/blob/09b3d272c6cfcc8eab8254a69e0566a4a20b67b7/blockchain.py#L184) in the Blockchain class to ensure that the `chain` attribute can't be overwritten. 
 
 Anyway I didn't write any code that reuses/overwrites variables.
 
