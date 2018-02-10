@@ -51,7 +51,7 @@ def blockchain_mine():
     blockchain.new_transaction(
         sender=blockchain.mining_sender_address,
         recipient=node_identifier,
-        amount=blockchain.mining_reward
+        amount=blockchain.mining_reward_amount
     )
 
     block = blockchain.new_block(new_proof)
@@ -62,6 +62,14 @@ def blockchain_mine():
         'transactions': block.transactions,
         'proof': block.proof,
         'previous_hash': block.previous_hash,
+    }
+    return json.dumps(response, cls=bc.LazyEncoder, indent=4), 200
+
+
+@app.route("/sum", methods=["GET"])
+def sum_transactions():
+    response = {
+        "total amount of all transactions": blockchain.total_transactions_amount()
     }
     return json.dumps(response, cls=bc.LazyEncoder, indent=4), 200
 
