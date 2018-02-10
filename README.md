@@ -137,17 +137,17 @@ The following requirements where solved by writing a Decorator:
 * use closures 
 * AOP 
 
-The decorator [@logger](https://github.com/tripl3a/blockchain/blob/566117b215bd88af58da5b26237b1389282e2789/blockchain.py#L66) is used in the class Blockchain to print console outputs 
+The decorator [@logger](https://github.com/tripl3a/blockchain/blob/b99daef56060f260d8c748d98a81a427dcb15620/blockchain.py#L69) is used in the class Blockchain to print console outputs 
 before entering and after executing a (decorated) method. 
 Using Decorators is also a way to add aspects to Python methods. (=> AOP)
 
 Side effect free functions: 
-* Example 1: Blockchain.valid_proof()
-* Example 2: Blockchain.proof_of_work()
+* Example 1: [Blockchain.valid_proof()](https://github.com/tripl3a/blockchain/blob/b99daef56060f260d8c748d98a81a427dcb15620/blockchain.py#L158)
+* Example 2: [Blockchain.proof_of_work()](https://github.com/tripl3a/blockchain/blob/b99daef56060f260d8c748d98a81a427dcb15620/blockchain.py#L141)
 
 Anonymous functions: 
 
-* In Blockchain.total_transactions_amount() a lambda function is used.
+* In [Blockchain.total_transactions_amount()](https://github.com/tripl3a/blockchain/blob/b99daef56060f260d8c748d98a81a427dcb15620/blockchain.py#L172) a lambda function is used.
 
 ## Domain Specific Language
 
