@@ -55,15 +55,21 @@ with a body containing our transaction structure, e.g.:
 
 ### Mining a block
 
-Mine a block by making a GET request to [http://localhost:5000/mine]()
+Mine a block by making a GET request to [http://localhost:5000/mine]().
 
 ![GET mine](./docs/screenshots/GET_mine.png)
 
 ### Viewing the chain 
 
-View the full chain by GET requesting [http://localhost:5000/chain]()
+View the full chain by GET requesting [http://localhost:5000/chain]().
 
 ![GET chain](./docs/screenshots/GET_chain.png)
+
+### Summing up all transactions
+
+Obtain the total amount of all transactions by GET requesting [http://localhost:5000/sum]().
+
+![GET sum](./docs/screenshots/GET_sum.png)
 
 ## Clean Code Development
 
