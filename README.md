@@ -170,7 +170,7 @@ A small example for a DSL in Python can be found in a [separate git repository](
 
 ### State diagram
 
-![UML state](./docs/diagrams/UML_StateDiagram.png)
+![UML state](./docs/diagrams/UML_StateDiagram2.png)
 
 
 
