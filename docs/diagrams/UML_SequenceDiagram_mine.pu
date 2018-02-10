@@ -1,15 +1,11 @@
 @startuml
 HTTPClient -> FlaskWebApp: GET /mine
-FlaskWebApp -> Blockchain: (get attribute) last_block
-Blockchain -> FlaskWebApp: last_block
-FlaskWebApp -> Block: (get attribute) last_proof
-Block -> FlaskWebApp: last_proof
+FlaskWebApp -> Blockchain: (get) last_proof
+Blockchain -> FlaskWebApp: last_proof
 FlaskWebApp -> Blockchain: proof_of_work(last_proof)
-Blockchain -> FlaskWebApp: proof
+Blockchain -> FlaskWebApp: new_proof
 FlaskWebApp -> Blockchain: new_transaction
-FlaskWebApp -> Block: last_block.hash()
-Block -> FlaskWebApp: previous_hash
-FlaskWebApp -> Blockchain: new_block(proof, previous_hash)
+FlaskWebApp -> Blockchain: new_block(new_proof)
 Blockchain -> FlaskWebApp: block
 FlaskWebApp -> JSON: dumps(response)
 JSON -> HTTPClient: serialized response
