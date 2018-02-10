@@ -12,7 +12,7 @@ with open('config.json', 'r') as f:
     config = json.load(f)
 
 ip_address = config['HOST_IP']['IP_ADDRESS']
-port_number = config['HOST_IP']['PORT_NUMBER']
+port_number = int(config['HOST_IP']['PORT_NUMBER'])
 
 if __name__ == "__main__":
     app.run(host=ip_address, port=port_number)
