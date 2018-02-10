@@ -19,7 +19,6 @@ py.test filename.py
 # Create UML class diagram from Python code
 pyreverse -my -A -o png -p blockchain ~/git-reps/blockchain/
 
-# TODO: create classes like here
 https://repository.genmymodel.com/khaldihiba92/blockchain
 
 ##### RUNNING SCRIPTS #####
