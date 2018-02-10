@@ -8,6 +8,15 @@ git fetch origin master
 git merge master
 git push origin working-copy:master
 
+
+##### Convert markdown to PDF #####
+
+# Use GRIP:
+pip install grip
+grip your_markdown.md
+
+http://superuser.com/questions/689056/how-can-i-convert-github-flavored-markdown-to-a-pdf
+
 ##### TEST #####
 
 https://docs.pytest.org/en/latest/goodpractices.html
