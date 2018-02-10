@@ -136,11 +136,12 @@ before entering and after executing a (decorated) method.
 Using Decorators is also a way to add aspects to Python methods. (=> AOP)
 
 Side effect free functions: 
-* Example 1: Block.hash()
-* Example 2: Blockchain.valid_proof()
-* Example 3: Blockchain.proof_of_work()
+* Example 1: Blockchain.valid_proof()
+* Example 2: Blockchain.proof_of_work()
 
-Anonymous functions: In Blockchain.total_transactions_amount() a lambda function is used.
+Anonymous functions: 
+
+* In Blockchain.total_transactions_amount() a lambda function is used.
 
 ## Domain Specific Language
 
