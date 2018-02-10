@@ -67,7 +67,9 @@ View the full chain by GET requesting [http://localhost:5000/chain]()
 
 ## Clean Code Development
 
-Principles were applied according to: [http://clean-code-developer.de/die-grade/roter-grad/]()
+Principles were applied according to: 
+* [http://clean-code-developer.de/die-grade/roter-grad/]()
+* [http://clean-code-developer.de/die-grade/orangener-grad/]()
 
 ### Using a version control system 
 
@@ -80,12 +82,20 @@ Well, as you can see we're on GitHub here... :white_check_mark:
 e.g. the hash() method: First it was in the Blockchain class. 
 Then I created the class Block where I also wanted a hash() method.
 After copy & pasting the code I was eventually able to delete the method in Blockchain.
-(see [this commit](https://github.com/tripl3a/blockchain/commit/f94974e7170cbe10a7e9154a991ae62101df2795))
+(see [this commit](https://github.com/tripl3a/blockchain/commit/f94974e7170cbe10a7e9154a991ae62101df2795)) :white_check_mark:
 
 ### Rename cryptic names (scout rule)
 
-for example in [this commit](https://github.com/tripl3a/blockchain/commit/7fcebf465a8359312bd1650f62e2c18e257c0519)  
-of test_blockchain.py :white_check_mark:
+for example in [this commit](https://github.com/tripl3a/blockchain/commit/7fcebf465a8359312bd1650f62e2c18e257c0519) of test_blockchain.py :white_check_mark:
+
+### Automated Integration/Unit Tests
+
+Automated integration/unit tests have been implemented, see [test_blockchain.py](./tests/test_blockchain.py)). :white_check_mark:
+
+Run them manually in terminal: 
+```
+py.test test_blockchain.py
+```
 
 ## Continuous Delivery
 
@@ -118,6 +128,7 @@ The following requirements where solved by writing a Decorator:
 * functions as parameters and return values :white_check_mark:
 * use closures :white_check_mark:
 * AOP :white_check_mark:
+
 The decorator [@logger](https://github.com/tripl3a/blockchain/blob/566117b215bd88af58da5b26237b1389282e2789/blockchain.py#L66) is used in the class Blockchain to print console outputs 
 before entering and after executing a (decorated) method. 
 Using Decorators is also a way to add aspects to Python methods. (=> AOP)
@@ -136,14 +147,6 @@ A small example for a DSL in Python can be found in a [separate git repository](
 
 ![UML classes](./docs/diagrams/classes_blockchain.png)
 
-### Package diagram
-
-![UML packages](./docs/diagrams/packages_blockchain.png)
-
-### State diagram
-
-![UML state](./docs/diagrams/UML_StateDiagram.png)
-
 ### Sequence diagram for adding a transaction
 
 ![UML transaction](./docs/diagrams/UML_SequenceDiagram_transaction.png)
@@ -156,6 +159,9 @@ A small example for a DSL in Python can be found in a [separate git repository](
 
 ![UML chain](./docs/diagrams/UML_SequenceDiagram_chain.png)
 
+### State diagram
+
+![UML state](./docs/diagrams/UML_StateDiagram.png)
 
 
 
