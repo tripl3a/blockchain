@@ -31,7 +31,7 @@ Just clone / download this repository.
 
 I used Postman to interact with the Blockchain API over HTTP.
 
-Start the server:
+Start the Flask server:
 ```
 $ python server.py
 
@@ -67,35 +67,37 @@ View the full chain by GET requesting [http://localhost:5000/chain]()
 
 ## Clean Code Development
 
-Principles were applied according to: 
+Principles were applied according to (some, not all): 
 * [http://clean-code-developer.de/die-grade/roter-grad/]()
 * [http://clean-code-developer.de/die-grade/orangener-grad/]()
 
 ### Using a version control system 
 
-Well, as you can see we're on GitHub here... :white_check_mark:
+Well, as you can see we're on GitHub here... 
 
 ### Apply simple refactoring patterns
 
 #### Extract methods (DRY principle)
 
-e.g. the hash() method: First it was in the Blockchain class. 
-Then I created the class Block where I also wanted a hash() method.
-After copy & pasting the code I was eventually able to delete the method in Blockchain.
-(see [this commit](https://github.com/tripl3a/blockchain/commit/f94974e7170cbe10a7e9154a991ae62101df2795)) :white_check_mark:
+Instead of copy and pasting the code, I created the method mine_new_block() in [test_blockchain.py](./tests/test_blockchain.py), which is used several times within this class. 
 
 ### Rename cryptic names (scout rule)
 
-for example in [this commit](https://github.com/tripl3a/blockchain/commit/7fcebf465a8359312bd1650f62e2c18e257c0519) of test_blockchain.py :white_check_mark:
+An example for renaming cryptic names and thus applying the scout rule is [this commit](https://github.com/tripl3a/blockchain/commit/7fcebf465a8359312bd1650f62e2c18e257c0519) of test_blockchain.py. 
 
 ### Automated Integration/Unit Tests
 
-Automated integration/unit tests have been implemented, see [test_blockchain.py](./tests/test_blockchain.py)). :white_check_mark:
+Automated integration/unit tests have been implemented in [test_blockchain.py](./tests/test_blockchain.py)). 
 
 Run them manually in terminal: 
 ```
 py.test test_blockchain.py
 ```
+
+### Single Responsibility Principle (SRP)
+
+In [blockchain.py](./blockchain.py) the class Block simply represents a block and the class Blockchain manages the blockchain.
+The code for the Flask WebApp is in a separate file [server.py](./server.py) 
 
 ## Continuous Delivery
 
@@ -124,14 +126,21 @@ For metrics I used [Sonarcloud](https://sonarcloud.io/dashboard?id=tripl3a-githu
 ## Aspect Oriented Programming & Functional Programming
 
 The following requirements where solved by writing a Decorator:
-* the use of higher order functions :white_check_mark:
-* functions as parameters and return values :white_check_mark:
-* use closures :white_check_mark:
-* AOP :white_check_mark:
+* the use of higher order functions 
+* functions as parameters and return values 
+* use closures 
+* AOP 
 
 The decorator [@logger](https://github.com/tripl3a/blockchain/blob/566117b215bd88af58da5b26237b1389282e2789/blockchain.py#L66) is used in the class Blockchain to print console outputs 
 before entering and after executing a (decorated) method. 
 Using Decorators is also a way to add aspects to Python methods. (=> AOP)
+
+Side effect free functions: 
+* Example 1: Block.hash()
+* Example 2: Blockchain.valid_proof()
+* Example 3: Blockchain.proof_of_work()
+
+Anonymous functions: In Blockchain.total_transactions_amount() a lambda function is used.
 
 ## Domain Specific Language
 
